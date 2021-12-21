@@ -1,0 +1,20 @@
+---
+- hosts: VMtool
+
+  remote_user: root
+
+  tasks:
+  - name: Install dependencies from repository
+    yum: name={{ item }} state=present
+    with_items:
+      - open-vm-tools
+  - name: Enabling vmtoolsd 
+    service: 
+      name: vmtoolsd 
+      enabled: yes
+  - name: Starting vmtoolsd
+    service:
+      name: vmtoolsd
+      state: restarted
+ 
+
